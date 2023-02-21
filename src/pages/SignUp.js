@@ -1,17 +1,20 @@
 import React, { useRef, useState } from 'react';
+import { useNavigate } from "react-router-dom";
+
 import "./SignUp.css"
 
 const SignUp = () => {
    const inputEmailRef = useRef();
    const inputPasswordRef = useRef();
    const inputCofirmPasswordRef = useRef();
+    const navigate = useNavigate();
     const [login,setLogin] = useState(true);
    
     const submitHandler =  async (event)=>{
        event.preventDefault();
        const email = inputEmailRef.current.value;
        const password = inputPasswordRef.current.value;
-
+           
        if(!login){
         if(password !==inputCofirmPasswordRef.current.value){
           return alert("password and Confrim password are not same");
@@ -36,13 +39,16 @@ const SignUp = () => {
               },
         })
          if(res.ok){
+          setLogin(true);
+
           const data = await res.json();
           localStorage.setItem("idtoken",JSON.stringify(data));
           console.log(data)
-            setLogin(true);
+            // setLogin(true);
             inputEmailRef.current.value="";
             inputPasswordRef.current.value="";
             console.log("all ok")
+            navigate('/home')
             if(!login){
               inputCofirmPasswordRef.current.value="";
               alert('signUp successful');
@@ -55,12 +61,17 @@ const SignUp = () => {
           throw data.error;
          }
        } catch(error){
-         console.log(error.message) 
+        alert(error.message)
+        //  console.log(error.message) 
        }
     };
 
     const accountHandler = ()=>{
       setLogin((prev)=>!prev);
+    }
+
+    const forgotPasswordHandler = ()=>{
+       navigate("/forgotpassword")
     }
   return (
     <div className='wrapper'>
@@ -80,10 +91,11 @@ const SignUp = () => {
 )}
    
  <button type='submit'>{login ?"Login" : "Sign Up"}</button>
+ {login && <button onClick={forgotPasswordHandler} href="#">Forgot Password</button>}
   <div onClick={accountHandler} className='signup-login'>
   {login ? "click here to Sign Up" : "click here to Login"}
   </div>
-  <button>Submit</button>
+  {/* <button>Submit</button> */}
 </form>
     </div>
   )
