@@ -1,7 +1,13 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import "./MainNavigation.css"
 const MainNavigation = () => {
+  const navigate = useNavigate();
+  const logoutHandler = async ()=>{
+     await localStorage.removeItem('idtoken');
+    navigate("/login");
+    alert("logout sucessfully")
+  }
   return (
     <div className='mainNav'>
       <nav>
@@ -20,6 +26,9 @@ const MainNavigation = () => {
           </li>
           <li>
             <NavLink to="/login">Login</NavLink>
+          </li>
+          <li>
+            <NavLink onClick={logoutHandler}>Logout</NavLink>
           </li>
         </ul>
       </nav>
