@@ -1,5 +1,7 @@
 
   .mainNav {
+    display: flex;
+    justify-content: center;
   position: sticky;
   width: 100%;
   border-bottom: 5px solid gray;
@@ -52,3 +54,5 @@
 .mainNav li:hover::before {
   transform: scaleX(0);
 }
+
+

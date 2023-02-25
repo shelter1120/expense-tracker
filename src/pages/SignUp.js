@@ -46,7 +46,7 @@ const SignUp = () => {
         const data = await res.json();
         const useremailid = email;
         const replaceEmailId = useremailid.replace("@", "").replace(".", "");
-        localStorage.setItem("email",replaceEmailId);
+        localStorage.setItem("email", replaceEmailId);
         localStorage.setItem("idtoken", JSON.stringify(data));
         console.log(data);
         // setLogin(true);

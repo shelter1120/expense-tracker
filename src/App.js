@@ -5,11 +5,16 @@ import Home from './pages/Home';
 import UpdateProfile from './components/UpdateProfile';
 import ForgotPassword from './components/ForgotPassword';
 import Expenses from './pages/Expenses';
+import Premium from './components/Premium';
+import { useSelector } from 'react-redux';
+
 function App() {
+ const themeMode = useSelector((state)=>state.theme.theme)
   return (
     <div>
       {/* <SignUp /> */}
       <MainNavigation />
+      <div className={themeMode === 'dark' ? 'dark':''}>
       <Routes>
         <Route path="/home" element={<Home />} />
       
@@ -18,7 +23,7 @@ function App() {
         <Route path="/expense" element={<Expenses />} />
         <Route path="/forgotPassword" element={<ForgotPassword />} />
       </Routes>
-      
+      </div>
     </div>
   );
 }
