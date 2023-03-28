@@ -6,7 +6,7 @@ import './ExpenseItem.css'
  
     const deleteHandler=async()=>{
         try{
-            const res = await fetch(`https://react-http-1fabf-default-rtdb.firebaseio.com/${localStorage.getItem("email")}/${props.item.id}.json`,
+            const res = await fetch(`https://react-http-1fabf-default-rtdb.firebaseio.com/expense-tracker/${localStorage.getItem("email")}/${props.item.id}.json`,
              {
                 method:'DELETE',
                 headers :{
@@ -29,7 +29,7 @@ import './ExpenseItem.css'
     }
     const editHandler=async()=>{
         try{
-            const res = await fetch(`https://react-http-1fabf-default-rtdb.firebaseio.com/${localStorage.getItem("email")}/${props.item.id}.json`,
+            const res = await fetch(`https://react-http-1fabf-default-rtdb.firebaseio.com/expense-tracker/${localStorage.getItem("email")}/${props.item.id}.json`,
              {
                 method:'DELETE',
                 headers :{

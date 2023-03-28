@@ -4,7 +4,7 @@ export const addingExpense = (expenseItem) => {
   return async (dispatch) => {
     try {
       const res = await fetch(
-        `https://data-edd3c-default-rtdb.firebaseio.com/expense-tracker/${localStorage.getItem("email")}.json`,
+        `https://react-http-1fabf-default-rtdb.firebaseio.com/expense-tracker/${localStorage.getItem("email")}.json`,
         {
           method: "POST",
           headers: {

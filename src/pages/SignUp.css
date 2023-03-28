@@ -1,6 +1,6 @@
 .wrapper {
     margin: auto;
-    padding-top: 150px;
+    padding-top: 100px;
   }
   
   .form {
@@ -14,11 +14,18 @@
     box-sizing: border-box;
     text-align: center;
     box-shadow: 0 0 10px rgb(213, 10, 10);
+    background: url('https://cdn.pixabay.com/photo/2018/04/05/14/09/sunflowers-3292932__340.jpg') no-repeat center center fixed;
+    background-size: cover;
+    background-color: rgba(0, 0, 0, 0.5);
+
   }
   .form label {
     font-weight: bold;
     
   }
+   .form:hover{
+    box-shadow: 0 0 10px rgba(0, 0,0,0.2);
+   }
   
   .form button {
     width: 100%;

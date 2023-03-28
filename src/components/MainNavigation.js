@@ -14,6 +14,8 @@ const MainNavigation = () => {
     dispatch(authAction.logout());
   }else{
     dispatch(authAction.login());
+
+    
   }
  
  })

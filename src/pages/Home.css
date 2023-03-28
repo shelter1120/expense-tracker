@@ -2,4 +2,29 @@ div {
     color: white;
   }
   
-   
+  mynav {
+    color: yellow;
+  }
+  
+  /* .cloud {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300px;
+    height: 100px;
+    background: #9f5b5b;
+    border-radius: 100px;
+    transform: translate(-50%, -50%);
+    animation: cloudMove 10s linear infinite;
+    box-shadow: 0px 0px 30px 5px rgba(255, 255, 255, 0.8);
+  }
+  
+  @keyframes cloudMove {
+    from {
+      left: -200px;
+    }
+    to {
+      left: 100%;
+    }
+  }
+     */

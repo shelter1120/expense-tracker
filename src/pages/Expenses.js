@@ -1,4 +1,5 @@
-import React, { useEffect, useRef} from "react";
+import React, { useCallback, useEffect, useRef} from "react";
+import "./Expenses.css";
 import ExpenseItem from "../components/ExpenseItem";
 import { addingExpense } from "../store/ExpenseAction";
 import { useDispatch ,useSelector} from "react-redux";
@@ -38,27 +39,28 @@ const Expenses = () => {
   const inputAmountRef = useRef();
   const inputDescRef = useRef();
   const inputCategoryRef = useRef();
-
+ 
   // const firstTime = useSelector((state) => state.expense.firstTime);
   const expenses = useSelector((state)=>state.expense.expenses)
   const totalAmount = useSelector((state)=>state.expense.totalAmount)
-
-  const deleteExpenseHandler = async(item) => {
+ 
+  const deleteExpenseHandler =useCallback( async(item) => {
     const updatedTotalAmount = Number(totalAmount) - Number(item.amount)
     const updatedExpenses = expenses.filter((expense) => {
       return expense.id !== item.id;
     });
+    console.log(updatedExpenses)
     console.log("afterdeleted" , updatedExpenses)
     dispatch(expenseAction.removeExpense({
       expenses: updatedExpenses,
       totalAmount : updatedTotalAmount
     }));
     console.log(updatedTotalAmount)
-  };
+  },[dispatch,totalAmount,expenses]);
   
-  const editExpenseHandler = (item) => {
+  const editExpenseHandler =useCallback((item) => {
 
-
+ console.log(item)
     inputAmountRef.current.value= item.amount
     inputDescRef.current.value= item.description
     inputCategoryRef.current.value = item.category
@@ -72,9 +74,9 @@ const Expenses = () => {
         totalAmount : updatedTotalAmount
       }))
       console.log(updatedTotalAmount)
-  };
+  },[dispatch,totalAmount,expenses]);
 
-  const addExpenseHandler = async (event) => {
+  const addExpenseHandler =useCallback( async (event) => {
     event.preventDefault();
     const obj = {
       amount: inputAmountRef.current.value,
@@ -114,7 +116,7 @@ const Expenses = () => {
     // } catch (error) {
     //   console.log(error);
     // }
-  };
+  },[dispatch]);
 
    useEffect(() => {
     async function fetchExpenses(){
@@ -135,7 +137,6 @@ const Expenses = () => {
         let updatedtotalAmount =0;
         const newdata = [];
         for (let key in data) {
-
           newdata.push({ id: key, ...data[key] });
           updatedtotalAmount += Number(data[key].amount)
         }
@@ -155,9 +156,8 @@ const Expenses = () => {
   }
 
   fetchExpenses()
-   }, [dispatch , addExpenseHandler ]);
+   }, [dispatch,addExpenseHandler]);
 
- 
 
   return (
     <div>
@@ -203,7 +203,7 @@ const Expenses = () => {
       <div className="expenses-list">
         {expenses.map((expense) => (
           <ExpenseItem
-            key={expense.id}
+            key={Math.random()}
             id={expense.id}
             item={expense}
             deleteItem={deleteExpenseHandler}
